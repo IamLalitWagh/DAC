@@ -1,0 +1,152 @@
+import java.util.Scanner;
+
+class LinkedList{
+	
+	static class Product {
+		private int pid;
+		private String Name;
+		private String Type;
+		private int price;
+		private Product next;
+		private Product prev;
+		
+	Product(int pid,
+	String Name,
+	String Type,
+	int price){
+		this.pid = pid;
+		this.Name = Name;
+		this.Type= Type;
+		this.price = price;
+		next=prev=null;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", Name=" + Name + ", Type=" + Type + ", price=" + price + "]";
+	}
+	
+	
+
+}
+	private Product head ;
+	
+	public boolean isEmpty() {
+		return head==null;
+	}
+	
+	public void addLast(int pid,String Name,String Type,int price) 
+	{
+		Product p1 = new Product(pid,Name,Type,price); 
+		if(head == null) {
+			head=p1;
+			p1.next = p1.prev = p1;
+		}
+		
+		else {
+			head.prev.next = p1;
+			p1.prev = head.prev;
+			head.prev = p1;
+			p1.next=head;
+		}
+		
+	}
+	
+	public void displayAll() {
+		if(head == null) {
+			System.out.println("LIst is empty");
+			return;
+		}
+		if(head == head.next) {
+			System.out.println(head);
+		}
+		
+		else {
+			Product trav=head;
+			System.out.println("list = ");
+			System.out.println(" "+trav);
+			trav = trav.next;
+			while(trav != head) {
+				System.out.println(" "+trav);
+				trav =  trav.next;
+				
+			}
+			System.out.println("");
+		}
+	}
+	
+	public Product displaypid(int pid) {
+		if(head == null) {
+			System.out.println("list is empty");
+			return null;
+		}
+		else {
+			Product trav=head;
+			if (trav.pid == pid)
+				return trav;
+			trav = trav.next;
+			while(trav != head) {
+				if(trav.pid == pid) {
+					return trav;
+				}
+				
+			}
+			return null;
+		}
+	}
+	
+	public void deleteFirst() throws Exception {
+		
+		if(head==null)
+			throw new Exception("List is empty not deleted");
+		
+		if(head == head.next)
+			{
+			head=null;
+			}
+		else {
+			head.prev.next = head.next;
+			head.next.prev = head.prev;
+			head = head.next;
+		}
+		
+	}
+	
+	public void Edit(Product p) {
+		System.out.println("Enter product data");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("ENter name");
+		p.Name = sc.nextLine();
+		System.out.println("ENter Type");
+		p.Type = sc.nextLine();
+		System.out.println("ENter price");
+		p.price = sc.nextInt();
+		
+		
+	}
+	
+	public boolean editProduct(int id) throws Exception {
+		if(head == null)
+			throw new Exception("List is empty not editable");
+		if(head.pid == id) {
+			System.out.println(head);
+			Edit(head);
+			return true;
+		}
+		else {
+			Product trav=head;
+			trav = trav.next;
+			while(trav != head) {
+				if(trav.pid == id) {
+					System.out.println(trav);
+					Edit(trav);
+					return true;
+				}
+			
+		}		
+			throw new Exception("Lproduct name not found");
+	}
+	}
+
+}
+

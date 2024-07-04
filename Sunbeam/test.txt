@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		LinkedList ls = new LinkedList();
+		int choice;
+		Scanner sc = new Scanner(System.in); 
+		do {
+			System.out.println("1. Add product in linked list at last node.\n 2. Display all product.\n 3. Display specific product on the basis of Product Id.\n 4. Delete First node in given link list.\n 5. Edit Product by  specifying its name.\n 0.Exit.\n");
+			System.out.println("Enter choice");
+			choice = sc.nextInt();
+			
+			switch (choice) {
+			case 1:
+				System.out.println("Enter pid");
+				int pid = sc.nextInt();
+				System.out.println("Enter name");
+				String name = sc.next();
+				System.out.println("Enter Type");
+				String type = sc.next();
+				System.out.println("Enter price");
+				int price = sc.nextInt();
+				ls.addLast(pid, name, type, price);
+				break;
+				
+			case 2:
+				ls.displayAll();
+				break;
+				
+			case 3:
+				System.out.println("Enter pid to search");
+				int pi = sc.nextInt();
+				LinkedList.Product p1 =   ls.displaypid(pi);
+				System.out.println(p1);
+				break;
+				
+			case 4:
+				try {
+					ls.deleteFirst();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				break;
+				
+			case 5:
+				try {
+					System.out.println("Enter pid to edit");
+					int n = sc.nextInt();
+					boolean b =  ls.editProduct(n);
+					if(b)
+						System.out.println("product is edited");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+				
+			case 0:
+				System.out.println("Exited");
+				break;
+
+			default:
+				System.out.println("Wrong input");
+				break;
+			}
+			
+		}
+		while(choice != 0);
+		
+		
+		
+		
+
+		
+		
+	}
+
+}
